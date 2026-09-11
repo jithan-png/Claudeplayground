@@ -67,10 +67,10 @@ export default function Home() {
               className="lede reveal-word"
               style={{ animationDelay: "700ms", marginTop: 28 }}
             >
-              Genuss Renovation Ltd. is a flooring, tiling and construction
-              company that grew into a full renovation partner — high-end custom
-              homes, commercial tenant improvements, and accessibility
-              modifications including WorkSafeBC-funded work.
+              Your trusted renovation and construction partner in Surrey and the
+              Lower Mainland — flooring and tiling, high-end custom homes,
+              commercial tenant improvements, and accessibility modifications
+              including WorkSafeBC-funded work.
             </p>
             <div
               className="hero__actions reveal-word"
@@ -235,7 +235,7 @@ export default function Home() {
                 The boring things, <span className="ital">done right.</span>
               </>
             }
-            aside="Renovation horror stories almost never start with bad taste. They start with a missed date, an unreturned call and a price that moved. We built the company around fixing exactly those three things."
+            aside="Quality workmanship, clean execution, and respect for your space and your timeline. We understand the scope up front to prevent delays, communicate clearly, and follow through on what we committed to."
           />
           <WhyGrid />
         </div>

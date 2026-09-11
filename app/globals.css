@@ -1153,6 +1153,15 @@ button {
   transform: scale(1.06);
 }
 
+/* Restated after the generic hover rule so the per-card variants win. */
+.proj:nth-child(3n + 2):hover .proj__art svg {
+  transform: scale(1.38) rotate(4deg);
+}
+
+.proj:nth-child(3n):hover .proj__art svg {
+  transform: scale(0.88) rotate(-3deg);
+}
+
 .proj__type {
   position: absolute;
   top: 14px;
