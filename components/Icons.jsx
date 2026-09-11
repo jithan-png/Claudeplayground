@@ -128,6 +128,23 @@ export function IconDoc({ size = 32 }) {
   );
 }
 
+export function Shield({ size = 16 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" {...base}>
+      <path d="M8 1.6 13.4 3.7v4.3c0 3.2-2.3 5.4-5.4 6.2-3.1-.8-5.4-3-5.4-6.2V3.7z" />
+      <path d="m5.8 8 1.5 1.5L10.4 6" />
+    </svg>
+  );
+}
+
+export function Star({ size = 14 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 16 16" fill="currentColor" aria-hidden>
+      <path d="m8 1.6 1.9 4 4.4.6-3.2 3.1.8 4.4L8 11.6l-3.9 2.1.8-4.4L1.7 6.2l4.4-.6z" />
+    </svg>
+  );
+}
+
 export const whyIcons = [
   IconTrowel,
   IconCalendar,

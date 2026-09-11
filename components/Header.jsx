@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site, services } from "@/lib/site";
 import { Arrow, Phone } from "./Icons";
+import ThemeToggle from "./ThemeToggle";
 
 function Mark() {
   return (
@@ -101,6 +102,7 @@ export default function Header() {
               <Phone />
               {site.phone}
             </a>
+            <ThemeToggle />
             <Link href="/contact" className="btn">
               Get a quote <Arrow />
             </Link>
@@ -120,12 +122,18 @@ export default function Header() {
       <div className={`mobilenav${open ? " is-open" : ""}`}>
         {services.map((s) => (
           <Link key={s.slug} href={`/services/${s.slug}`}>
-            {s.title}
+            {s.title} <Arrow />
           </Link>
         ))}
-        <Link href="/projects">Projects</Link>
-        <Link href="/about">About</Link>
-        <Link href="/contact">Contact</Link>
+        <Link href="/projects">
+          Projects <Arrow />
+        </Link>
+        <Link href="/about">
+          About <Arrow />
+        </Link>
+        <Link href="/contact">
+          Contact <Arrow />
+        </Link>
         <div className="mobilenav__foot">
           <a className="btn btn--ghost" href={site.phoneHref}>
             <Phone /> {site.phone}

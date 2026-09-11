@@ -5,9 +5,9 @@ import {
   projects,
   testimonials,
   differentiators,
+  gallery,
 } from "@/lib/site";
-import { HeroGrid } from "./Patterns";
-import { Arrow, Check, Phone, whyIcons } from "./Icons";
+import { Arrow, Check, Phone, Star, whyIcons } from "./Icons";
 
 export function SectionHead({ eyebrow, title, aside, teal }) {
   return (
@@ -19,7 +19,7 @@ export function SectionHead({ eyebrow, title, aside, teal }) {
         <h2 className="h2">{title}</h2>
       </div>
       {aside ? (
-        <div className="shead__aside r" style={{ "--d": "120ms" }}>
+        <div className="r" style={{ "--d": "120ms" }}>
           <p className="lede">{aside}</p>
         </div>
       ) : null}
@@ -32,15 +32,17 @@ export function PageHero({
   eyebrow,
   title,
   lede,
-  accent = "brass",
+  image,
+  imageAlt = "",
   children,
 }) {
   return (
-    <section className={`phero${accent === "teal" ? " phero--teal" : ""}`}>
-      <div className="phero__art" aria-hidden>
-        <HeroGrid accent={accent} />
-      </div>
-      <div className="phero__glow" aria-hidden />
+    <section className="phero">
+      {image ? (
+        <div className="phero__photo" aria-hidden>
+          <img src={image} alt={imageAlt} fetchPriority="high" />
+        </div>
+      ) : null}
       <div className="wrap">
         {crumbs.length ? (
           <nav className="crumbs" aria-label="Breadcrumb">
@@ -52,9 +54,7 @@ export function PageHero({
             ))}
           </nav>
         ) : null}
-        <span className={`eyebrow${accent === "teal" ? " eyebrow--teal" : ""}`}>
-          {eyebrow}
-        </span>
+        <span className="eyebrow">{eyebrow}</span>
         <h1 className="display">{title}</h1>
         {lede ? <p className="lede">{lede}</p> : null}
         {children}
@@ -63,31 +63,16 @@ export function PageHero({
   );
 }
 
-export function Stats() {
-  return (
-    <div className="wrap">
-      <div className="stats r">
-        {site.stats.map((s) => (
-          <div className="stats__item" key={s.label}>
-            <div className="stats__val">{s.value}</div>
-            <div className="stats__label">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export function Marquee() {
   const items = [
-    "Hardwood & engineered flooring",
+    "Vinyl plank & hardwood flooring",
     "Large-format porcelain",
     "Curbless wet rooms",
     "WorkSafeBC modifications",
     "Custom home construction",
     "Tenant improvements",
-    "Heated floor systems",
-    "Natural stone & marble",
+    "Basement renovations",
+    "Kitchen & bathroom remodels",
     "Finish carpentry",
     "Restoration subcontracting",
     "Aging in place",
@@ -108,9 +93,26 @@ export function Marquee() {
   );
 }
 
+/** Continuously scrolling strip of project photography. */
+export function PhotoMarquee() {
+  const doubled = [...gallery, ...gallery];
+  return (
+    <div className="pmarquee" aria-label="Recent Genuss Renovation work">
+      <div className="pmarquee__track">
+        {doubled.map((g, i) => (
+          <figure key={`${g.src}-${i}`} aria-hidden={i >= gallery.length}>
+            <img src={g.src} alt={i < gallery.length ? g.alt : ""} loading="lazy" />
+            <figcaption>{g.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function Process() {
   return (
-    <div className="process">
+    <div className="process rail">
       {processSteps.map((s, i) => (
         <div className="process__step r" key={s.n} style={{ "--d": `${i * 70}ms` }}>
           <span className="process__n">{s.n}</span>
@@ -122,10 +124,10 @@ export function Process() {
   );
 }
 
-export function ProjectGrid({ limit }) {
+export function ProjectGrid({ limit, rail }) {
   const list = limit ? projects.slice(0, limit) : projects;
   return (
-    <div className="proj-grid">
+    <div className={`proj-grid${rail ? " rail" : ""}`}>
       {list.map((p, i) => (
         <article className="proj r" key={p.title} style={{ "--d": `${i * 70}ms` }}>
           <div className="proj__art">
@@ -157,7 +159,7 @@ export function ProjectGrid({ limit }) {
 
 export function WhyGrid() {
   return (
-    <div className="why">
+    <div className="why rail">
       {differentiators.map((d, i) => {
         const Icon = whyIcons[i % whyIcons.length];
         return (
@@ -174,23 +176,48 @@ export function WhyGrid() {
 
 export function Quotes() {
   return (
-    <div className="quotes">
+    <div className="quotes rail">
       {testimonials.map((t, i) => (
-        <figure className="quote r" key={t.detail} style={{ "--d": `${i * 80}ms` }}>
-          <span className="quote__mark" aria-hidden>
-            &ldquo;
-          </span>
+        <figure className="quote r" key={t.name} style={{ "--d": `${i * 80}ms` }}>
+          <div className="quote__stars" aria-label="Five out of five">
+            {[0, 1, 2, 3, 4].map((n) => (
+              <Star key={n} />
+            ))}
+          </div>
           <blockquote>
             <p>{t.quote}</p>
           </blockquote>
           <figcaption>
             <footer>
-              <strong>{t.name}</strong>
-              <span>{t.detail}</span>
+              <span className="quote__avatar" aria-hidden>
+                {t.name.trim()[0]}
+              </span>
+              <span>
+                <strong>{t.name}</strong>
+                <span>{t.detail}</span>
+              </span>
             </footer>
           </figcaption>
         </figure>
       ))}
+    </div>
+  );
+}
+
+export function PullQuote({ quote }) {
+  return (
+    <div className="wrap">
+      <figure className="pullquote r">
+        <span className="eyebrow eyebrow--plain">What clients say</span>
+        <blockquote style={{ marginTop: 20 }}>
+          &ldquo;{quote.quote}&rdquo;
+        </blockquote>
+        <figcaption>
+          <footer>
+            {quote.name} &mdash; {quote.detail}
+          </footer>
+        </figcaption>
+      </figure>
     </div>
   );
 }
@@ -202,12 +229,14 @@ export function CTA({
       Let&apos;s talk about <em className="ital">your</em> project.
     </>
   ),
-  lede = "Free consultation, a written itemized scope, and a firm price. No pressure, no vague allowances — just a straight answer about what your project takes.",
+  lede = "Free consultation, a written itemized scope, and a firm price. We define the scope up front so there are no delays and no hidden costs.",
 }) {
   return (
     <div className="wrap">
-      <div className="cta r">
-        <div className="cta__glow" aria-hidden />
+      <div className="cta inverse r">
+        <div className="cta__photo" aria-hidden>
+          <img src="/img/6585770.webp" alt="" loading="lazy" />
+        </div>
         <span className="eyebrow eyebrow--plain">{eyebrow}</span>
         <h2 className="h2">{title}</h2>
         <p className="lede">{lede}</p>
@@ -220,24 +249,6 @@ export function CTA({
           </a>
         </div>
       </div>
-    </div>
-  );
-}
-
-export function PullQuote({ quote }) {
-  return (
-    <div className="wrap">
-      <figure className="pullquote r">
-        <span className="eyebrow eyebrow--plain">What clients say</span>
-        <blockquote style={{ marginTop: 22 }}>
-          &ldquo;{quote.quote}&rdquo;
-        </blockquote>
-        <figcaption>
-          <footer>
-            {quote.name} — {quote.detail}
-          </footer>
-        </figcaption>
-      </figure>
     </div>
   );
 }

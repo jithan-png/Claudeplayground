@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { site, services } from "@/lib/site";
 import { Arrow } from "@/components/Icons";
+import Stats from "@/components/Stats";
 import {
   CTA,
   PageHero,
   Process,
   SectionHead,
-  Stats,
   WhyGrid,
 } from "@/components/Blocks";
 
@@ -20,12 +20,14 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
+        image="/img/7937659.webp"
+        imageAlt="Genuss Renovation team on site in hard hats"
         crumbs={[{ label: "Home", href: "/" }, { label: "About" }]}
         eyebrow="About Genuss"
         title={
           <>
             A trade company that grew into a{" "}
-            <em style={{ fontStyle: "italic", color: "var(--brass-lite)" }}>
+            <em className="ital">
               renovation partner
             </em>
           </>
@@ -103,8 +105,8 @@ export default function AboutPage() {
               </>
             }
           />
+          <Process />
         </div>
-        <Process />
       </section>
 
       <section className="section">

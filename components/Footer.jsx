@@ -4,7 +4,7 @@ import { Instagram, Mail, Phone } from "./Icons";
 
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="footer inverse">
       <div className="wrap">
         <div className="footer__grid">
           <div>

@@ -38,7 +38,7 @@ export default async function ServicePage({ params }) {
   return (
     <>
       <PageHero
-        accent={service.accent}
+        image={service.image}
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Services", href: "/#services" },
@@ -121,7 +121,7 @@ export default async function ServicePage({ params }) {
               <div className="detail r" key={d.h} style={{ "--d": `${i * 70}ms` }}>
                 <span
                   className="detail__n"
-                  style={teal ? { color: "var(--teal)" } : undefined}
+                  style={teal ? { color: "var(--accent-2-ink)" } : undefined}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -145,8 +145,8 @@ export default async function ServicePage({ params }) {
               </>
             }
           />
+          <Process />
         </div>
-        <Process />
       </section>
 
       {/* FAQ */}
@@ -179,7 +179,7 @@ export default async function ServicePage({ params }) {
               </>
             }
           />
-          <ProjectGrid limit={3} />
+          <ProjectGrid limit={3} rail />
         </div>
       </section>
 

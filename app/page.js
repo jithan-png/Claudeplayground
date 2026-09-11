@@ -1,40 +1,42 @@
 import Link from "next/link";
 import { site, services, faqs, featuredQuote } from "@/lib/site";
-import { Arrow, Check, Phone } from "@/components/Icons";
-import { HeroGrid } from "@/components/Patterns";
+import { Arrow, Check, Phone, Shield } from "@/components/Icons";
 import ServiceCards from "@/components/ServiceCards";
 import Accordion from "@/components/Accordion";
+import Stats from "@/components/Stats";
+import BeforeAfter from "@/components/BeforeAfter";
 import {
   CTA,
   Marquee,
-  PullQuote,
+  PhotoMarquee,
   Process,
   ProjectGrid,
+  PullQuote,
   Quotes,
   SectionHead,
-  Stats,
   WhyGrid,
 } from "@/components/Blocks";
 
 /** Headline that lifts in word by word. Pure CSS — no hydration needed. */
 function Headline() {
   const parts = [
-    { t: "Building", em: false },
-    { t: "your", em: false },
-    { t: "dreams,", em: false },
-    { t: "one", em: false },
-    { t: "renovation", em: false },
-    { t: "at", em: false },
-    { t: "a", em: false },
+    "Building",
+    "your",
+    "dreams,",
+    "one",
+    "renovation",
+    "at",
+    "a",
     { t: "time.", em: true },
-  ];
+  ].map((p) => (typeof p === "string" ? { t: p, em: false } : p));
+
   return (
     <h1 className="display">
       {parts.map((p, i) => (
         <span key={`${p.t}-${i}`}>
           <span
             className="reveal-word"
-            style={{ animationDelay: `${120 + i * 85}ms` }}
+            style={{ animationDelay: `${140 + i * 80}ms` }}
           >
             {p.em ? <em>{p.t}</em> : p.t}
           </span>{" "}
@@ -51,76 +53,69 @@ export default function Home() {
     <>
       {/* ---------------- Hero ---------------- */}
       <section className="hero">
-        <div className="hero__bg" aria-hidden>
-          <HeroGrid />
+        <div className="hero__photo" aria-hidden>
+          <img
+            src="/img/1571459.webp"
+            alt=""
+            fetchPriority="high"
+          />
         </div>
-        <div className="hero__glow hero__glow--a" aria-hidden />
-        <div className="hero__glow hero__glow--b" aria-hidden />
 
-        <div className="wrap hero__grid">
-          <div>
-            <span
-              className="eyebrow reveal-word"
-              style={{ animationDelay: "60ms" }}
-            >
-              Surrey, BC · Serving the Lower Mainland
-            </span>
-            <Headline />
-            <p
-              className="lede reveal-word"
-              style={{ animationDelay: "700ms", marginTop: 28 }}
-            >
-              Your trusted renovation and construction partner in Surrey and the
-              Lower Mainland — flooring and tiling, high-end custom homes,
-              commercial tenant improvements, and accessibility modifications
-              including WorkSafeBC-funded work.
-            </p>
-            <div
-              className="hero__actions reveal-word"
-              style={{ animationDelay: "830ms" }}
-            >
-              <Link href="/contact" className="btn btn--lg">
-                Get a free quote <Arrow />
-              </Link>
-              <a href={site.phoneHref} className="btn btn--ghost btn--lg">
-                <Phone /> {site.phone}
-              </a>
-            </div>
-          </div>
-
-          <aside
-            className="hero__aside reveal-word"
-            style={{ animationDelay: "950ms" }}
+        <div className="wrap hero__inner">
+          <span className="eyebrow reveal-word" style={{ animationDelay: "60ms" }}>
+            Surrey, BC
+          </span>
+          <Headline />
+          <p
+            className="hero__lede reveal-up"
+            style={{ animationDelay: "800ms" }}
           >
-            <figure className="hero__media">
-              <img
-                src="/img/1571459.webp"
-                alt="Bright modern interior with a floating timber staircase, built by Genuss Renovation"
-                fetchPriority="high"
-              />
-              <figcaption className="hero__caption">
-                <div>
-                  <span>Custom home</span>
-                  <strong>Morgan Creek, Surrey</strong>
-                </div>
-              </figcaption>
-            </figure>
-            <div className="hero__badge" style={{ marginTop: 14 }}>
-              <h4 className="h4">Licensed, insured, WCB-covered</h4>
-              <p>
-                Full liability coverage and active WorkSafeBC clearance on every
-                site. A+ rated with the Better Business Bureau.
-              </p>
-            </div>
-          </aside>
+            Your trusted renovation and construction partner in Surrey and the
+            Lower Mainland — flooring and tiling, high-end custom homes,
+            commercial tenant improvements, and accessibility modifications
+            including WorkSafeBC-funded work.
+          </p>
+          <div
+            className="hero__actions reveal-up"
+            style={{ animationDelay: "900ms" }}
+          >
+            <Link href="/contact" className="btn btn--lg">
+              Get a free quote <Arrow />
+            </Link>
+            <a href={site.phoneHref} className="btn btn--ghost btn--lg">
+              <Phone /> {site.phone}
+            </a>
+          </div>
+          <div
+            className="hero__trust reveal-up"
+            style={{ animationDelay: "1000ms" }}
+          >
+            <span>
+              <Shield size={16} /> Licensed &amp; insured
+            </span>
+            <span>
+              <Shield size={16} /> WorkSafeBC covered
+            </span>
+            <span>
+              <Shield size={16} /> A+ with the BBB
+            </span>
+          </div>
+        </div>
+
+        <div className="hero__tag" aria-hidden>
+          Custom home
+          <strong>Morgan Creek, Surrey</strong>
         </div>
       </section>
 
       <Stats />
-      <Marquee />
+
+      <section className="section section--tight">
+        <Marquee />
+      </section>
 
       {/* ---------------- Services ---------------- */}
-      <section className="section" id="services">
+      <section className="section section--surface" id="services">
         <div className="wrap">
           <SectionHead
             eyebrow="What we build"
@@ -135,10 +130,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------------- Before / after ---------------- */}
+      <section className="section">
+        <div className="wrap">
+          <SectionHead
+            eyebrow="Demolition to handover"
+            title={
+              <>
+                Drag to see the <span className="ital">difference</span>
+              </>
+            }
+            aside="Every project passes through the same two states. What matters is how organized the middle is — and how clean the finish is when we hand the keys back."
+          />
+          <div className="r">
+            <BeforeAfter
+              before="/img/4756488.webp"
+              after="/img/19966810.webp"
+              beforeAlt="Interior stripped back to the studs during a gut renovation"
+              afterAlt="The same style of space finished, with light flooring and large windows"
+              beforeLabel="Mid-renovation"
+              afterLabel="Completed"
+              start={45}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ---------------- Accessibility band ---------------- */}
       <section className="section section--tight">
         <div className="wrap">
-          <div className="band r">
+          <div className="band inverse r">
             <div className="band__glow" aria-hidden />
             <div className="band__inner">
               <div>
@@ -146,9 +167,10 @@ export default function Home() {
                   Accessibility division
                 </span>
                 <h2 className="h2">
-                  WorkSafeBC modifications &amp; <span className="ital">aging in place</span>
+                  WorkSafeBC modifications &amp;{" "}
+                  <span className="ital">aging in place</span>
                 </h2>
-                <p className="lede" style={{ marginTop: 20 }}>
+                <p className="lede" style={{ marginTop: 18 }}>
                   When mobility changes, a familiar home can turn hostile
                   overnight — a shower curb, a narrow doorway, a set of front
                   steps. We carry out accessibility modifications for seniors
@@ -163,7 +185,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <div style={{ marginTop: 32, display: "flex", gap: 12, flexWrap: "wrap" }}>
+                <div style={{ marginTop: 30 }}>
                   <Link href="/services/accessibility" className="btn btn--teal">
                     How WorkSafeBC work works <Arrow />
                   </Link>
@@ -228,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- Why us ---------------- */}
-      <section className="section">
+      <section className="section section--surface">
         <div className="wrap">
           <SectionHead
             eyebrow="Why Genuss"
@@ -253,8 +275,8 @@ export default function Home() {
         <div className="wrap">
           <div className="band-img r">
             <img
-              src="/img/4756488.webp"
-              alt="Interior stripped back to the studs during a full home gut renovation"
+              src="/img/18157534.webp"
+              alt="Renovation in progress with a ladder and freshly finished drywall"
               loading="lazy"
             />
             <div className="band-img__copy">
@@ -284,8 +306,23 @@ export default function Home() {
             }
             aside="You'll always know what's happening this week, what's happening next, and what we need from you."
           />
+          <Process />
         </div>
-        <Process />
+      </section>
+
+      {/* ---------------- Photo marquee ---------------- */}
+      <section className="section section--tight section--surface">
+        <div className="wrap">
+          <SectionHead
+            eyebrow="In the field"
+            title={
+              <>
+                A look at <span className="ital">recent work</span>
+              </>
+            }
+          />
+        </div>
+        <PhotoMarquee />
       </section>
 
       {/* ---------------- Projects ---------------- */}
@@ -295,13 +332,14 @@ export default function Home() {
             eyebrow="Selected work"
             title={
               <>
-                Recent projects across <span className="ital">the Lower Mainland</span>
+                Projects across{" "}
+                <span className="ital">the Lower Mainland</span>
               </>
             }
-            aside="A cross-section of what we've been building — residential finishes, ground-up custom homes, commercial fit-outs and barrier-free conversions."
+            aside="Residential finishes, ground-up custom homes, commercial fit-outs and barrier-free conversions."
           />
-          <ProjectGrid limit={6} />
-          <div style={{ marginTop: 34 }}>
+          <ProjectGrid limit={6} rail />
+          <div style={{ marginTop: 28 }}>
             <Link href="/projects" className="tlink">
               See the full project list <Arrow />
             </Link>
@@ -310,7 +348,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- Testimonials ---------------- */}
-      <section className="section section--tight">
+      <section className="section section--tight section--surface">
         <div className="wrap">
           <SectionHead
             eyebrow="In their words"
@@ -336,7 +374,7 @@ export default function Home() {
             }
             aside="The things people ask on the first phone call, answered up front."
           />
-          <Accordion items={faqs} />
+          <Accordion items={faqs.slice(0, 6)} />
         </div>
       </section>
 

@@ -10,11 +10,13 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHero
+        image="/img/7227629.webp"
+        imageAlt="Completed bathroom renovation with a frameless glass shower"
         crumbs={[{ label: "Home", href: "/" }, { label: "Projects" }]}
         eyebrow="Selected work"
         title={
           <>
-            Work we&apos;re happy to <em style={{ fontStyle: "italic", color: "var(--brass-lite)" }}>put our name on</em>
+            Work we&apos;re happy to <em className="ital">put our name on</em>
           </>
         }
         lede="A cross-section of recent Genuss projects — residential finishes, ground-up custom homes, commercial fit-outs and barrier-free conversions across the Lower Mainland."

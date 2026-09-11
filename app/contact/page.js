@@ -14,12 +14,14 @@ export default function ContactPage() {
   return (
     <>
       <PageHero
+        image="/img/19889120.webp"
+        imageAlt="Finished kitchen with island and pendant lighting"
         crumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
         eyebrow="Free consultation"
         title={
           <>
             Let&apos;s get your project{" "}
-            <em style={{ fontStyle: "italic", color: "var(--brass-lite)" }}>
+            <em className="ital">
               priced properly
             </em>
           </>
