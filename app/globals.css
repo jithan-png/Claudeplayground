@@ -50,9 +50,10 @@
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Dark ground — used by `.inverse` sections and by the page-wide toggle. */
-.inverse,
-:root[data-theme="dark"] {
+/* Dark ground for the hero, accessibility band, CTA and footer. Adding
+   `.inverse` to a section redefines the token set in place, so the same
+   components work on either ground without any colour literals. */
+.inverse {
   --accent-ink: #56bdf0;
   --accent-2-ink: #6fc4dd;
   --accent-tint: rgba(11, 150, 223, 0.16);
@@ -109,10 +110,6 @@ body::after {
   opacity: var(--grain);
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-:root[data-theme="dark"] body::after {
-  mix-blend-mode: overlay;
 }
 
 .inverse {
@@ -411,7 +408,6 @@ button {
 .nav a,
 .nav .drop > button,
 .header__phone,
-.themetoggle,
 .burger span,
 .burger span::before,
 .burger span::after {
@@ -444,6 +440,8 @@ button {
   align-items: center;
   gap: 11px;
   flex-shrink: 0;
+  min-height: 46px;
+  padding-right: 4px;
 }
 
 .logo__img {
@@ -524,26 +522,6 @@ button {
 }
 
 .header__phone:hover {
-  color: var(--accent);
-}
-
-.themetoggle {
-  width: 44px;
-  height: 44px;
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid var(--hdr-line);
-  border-radius: var(--radius);
-  color: var(--hdr-text);
-  transition: border-color 0.3s var(--ease), background 0.3s var(--ease),
-    color 0.3s var(--ease);
-}
-
-.themetoggle:hover {
-  background: var(--hdr-tint);
-  border-color: var(--accent);
   color: var(--accent);
 }
 
@@ -1879,10 +1857,6 @@ button {
   padding-right: 40px;
 }
 
-:root[data-theme="dark"] .field select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23eef5f9' stroke-opacity='.6' stroke-width='1.6'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-}
-
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
@@ -1972,12 +1946,15 @@ button {
 }
 
 .info-row dd {
-  margin: 4px 0 0;
+  margin: 2px 0 0;
   font-size: 15.5px;
 }
 
 .info-row a {
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .info-row a:hover {
@@ -2090,7 +2067,7 @@ button {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(238, 245, 249, 0.6);
-  margin-bottom: 18px;
+  margin-bottom: 6px;
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
@@ -2098,7 +2075,10 @@ button {
 }
 
 .crumbs a {
-  padding-block: 8px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 2px;
 }
 
 .crumbs a:hover {
@@ -2234,8 +2214,9 @@ button {
   font-size: 14.5px;
   color: var(--text-dim);
   transition: color 0.25s var(--ease);
-  display: inline-block;
-  padding-block: 8px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .footer li a:hover {
@@ -2436,6 +2417,19 @@ button {
   .rail.why > * {
     flex-basis: 78%;
   }
+  .rail.detail-grid > * {
+    flex-basis: 84%;
+  }
+
+  .spec-list li {
+    padding: 13px 15px;
+  }
+  .cost__body {
+    padding: 22px 20px 26px;
+  }
+  .cost__art {
+    aspect-ratio: 3 / 2;
+  }
 
   .svc {
     min-height: 300px;
@@ -2506,5 +2500,252 @@ button {
   }
   .hero__photo img {
     transform: none;
+  }
+}
+
+/* ---------- Cost guide ---------- */
+
+.notice {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  padding: clamp(22px, 3vw, 34px);
+  box-shadow: var(--shadow-sm);
+}
+
+.notice p {
+  margin-top: 12px;
+  color: var(--text-dim);
+  font-size: 15px;
+  line-height: 1.65;
+  max-width: 72ch;
+}
+
+.costs {
+  display: grid;
+  gap: 18px;
+}
+
+.cost {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.cost__art {
+  position: relative;
+  min-height: 240px;
+  background: var(--surface-2);
+}
+
+.cost__art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cost__body {
+  padding: clamp(22px, 3vw, 36px);
+}
+
+.cost__figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  margin-top: 16px;
+  padding-block: 16px;
+  border-block: 1px solid var(--line);
+}
+
+.cost__figures dt {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.cost__figures dd {
+  margin: 5px 0 0;
+  font-size: 16px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.cost__range {
+  color: var(--accent-ink);
+  font-family: var(--display);
+  font-size: clamp(21px, 2.4vw, 28px) !important;
+  line-height: 1.1;
+}
+
+.cost__drivers {
+  display: grid;
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.cost__drivers li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.cost__drivers svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--accent-ink);
+}
+
+/* ---------- Area links ---------- */
+
+.arealinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.arealinks a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  font-size: 14.5px;
+  font-weight: 700;
+  background: var(--surface);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+.arealinks a:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  transform: translateY(-2px);
+}
+
+.arealinks svg {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 860px) {
+  .cost {
+    grid-template-columns: 1fr;
+  }
+  .cost__art {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.footer__areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 12.5px;
+}
+
+.footer__areas a {
+  color: var(--text-faint);
+  padding-block: 6px;
+  transition: color 0.25s var(--ease);
+}
+
+.footer__areas a:hover {
+  color: var(--accent-ink);
+}
+
+/* ---------- Jump chips ---------- */
+
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  background: var(--surface);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-dim);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.jump a:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Anchored cards must clear the fixed header when jumped to. */
+[id] {
+  scroll-margin-top: 92px;
+}
+
+@media (max-width: 760px) {
+  .jump {
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .jump::-webkit-scrollbar {
+    display: none;
+  }
+  .jump a {
+    flex-shrink: 0;
+  }
+  [id] {
+    scroll-margin-top: 80px;
+  }
+}
+
+/* Tag chips that are also links need a real tap target. */
+a.tag {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+a.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Reviews page: a full grid rather than the homepage's swipe rail. */
+.reviews-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+@media (max-width: 760px) {
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: visible;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+  .reviews-grid > * {
+    flex-basis: auto;
   }
 }

@@ -7,6 +7,13 @@ import { useEffect } from "react";
  * Mounted once in the root layout; re-scans on route change.
  */
 export default function Reveal() {
+  // Browsers restore the previous scroll offset on navigation, which lands a
+  // visitor halfway down the page they just opened. Always start at the top.
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const supported =
       typeof IntersectionObserver !== "undefined" &&

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { services, site } from "@/lib/site";
+import { services, site, areas } from "@/lib/site";
 import { Arrow, Phone } from "@/components/Icons";
 import Accordion from "@/components/Accordion";
 import {
@@ -78,24 +78,23 @@ export default async function ServicePage({ params }) {
             </div>
             <div className="r" style={{ "--d": "120ms" }}>
               <SpecList items={service.bullets} teal={teal} />
-              <div
-                style={{
-                  marginTop: 22,
-                  border: "1px solid var(--line)",
-                  borderRadius: 8,
-                  padding: "26px 28px",
-                  background: "var(--ink-850)",
-                }}
-              >
+              <div className="info-card" style={{ marginTop: 20 }}>
                 <span className={`eyebrow${teal ? " eyebrow--teal" : ""}`}>
                   Service area
                 </span>
+                <div className="areas">
+                  {areas.map((a) => (
+                    <Link className="tag" href={`/areas/${a.slug}`} key={a.slug}>
+                      {a.city}
+                    </Link>
+                  ))}
+                </div>
                 <p
                   className="body-dim"
-                  style={{ marginTop: 14, fontSize: 14.5 }}
+                  style={{ marginTop: 14, fontSize: 14 }}
                 >
-                  {site.serviceAreas.join(" · ")} — and the wider Lower
-                  Mainland. For larger projects we travel further; just ask.
+                  And the wider Lower Mainland. For larger projects we travel
+                  further; just ask.
                 </p>
               </div>
             </div>
@@ -116,7 +115,7 @@ export default async function ServicePage({ params }) {
             }
             aside="The parts of this work that separate a job that lasts twenty years from one that needs attention in two."
           />
-          <div className="detail-grid">
+          <div className="detail-grid rail">
             {service.detail.map((d, i) => (
               <div className="detail r" key={d.h} style={{ "--d": `${i * 70}ms` }}>
                 <span
@@ -195,7 +194,7 @@ export default async function ServicePage({ params }) {
               </>
             }
           />
-          <div className="why">
+          <div className="why rail">
             {others.map((o, i) => (
               <Link
                 href={`/services/${o.slug}`}

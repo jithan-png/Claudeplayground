@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site, services } from "@/lib/site";
 import { Arrow, Phone } from "./Icons";
-import ThemeToggle from "./ThemeToggle";
 
 function Mark() {
   return (
@@ -86,6 +85,15 @@ export default function Header() {
             <Link href="/projects" data-active={active("/projects")}>
               Projects
             </Link>
+            <Link href="/cost-guide" data-active={active("/cost-guide")}>
+              Cost guide
+            </Link>
+            <Link href="/reviews" data-active={active("/reviews")}>
+              Reviews
+            </Link>
+            <Link href="/areas" data-active={active("/areas")}>
+              Areas
+            </Link>
             <Link href="/about" data-active={active("/about")}>
               About
             </Link>
@@ -102,7 +110,6 @@ export default function Header() {
               <Phone />
               {site.phone}
             </a>
-            <ThemeToggle />
             <Link href="/contact" className="btn">
               Get a quote <Arrow />
             </Link>
@@ -127,6 +134,15 @@ export default function Header() {
         ))}
         <Link href="/projects">
           Projects <Arrow />
+        </Link>
+        <Link href="/cost-guide">
+          Cost guide <Arrow />
+        </Link>
+        <Link href="/reviews">
+          Reviews <Arrow />
+        </Link>
+        <Link href="/areas">
+          Service areas <Arrow />
         </Link>
         <Link href="/about">
           About <Arrow />

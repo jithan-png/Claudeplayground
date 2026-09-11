@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site, services } from "@/lib/site";
+import { site, services, areas } from "@/lib/site";
 import { Instagram, Mail, Phone } from "./Icons";
 
 export default function Footer() {
@@ -69,6 +69,15 @@ export default function Footer() {
                 <Link href="/projects">Projects</Link>
               </li>
               <li>
+                <Link href="/cost-guide">Renovation cost guide</Link>
+              </li>
+              <li>
+                <Link href="/reviews">Client reviews</Link>
+              </li>
+              <li>
+                <Link href="/areas">Service areas</Link>
+              </li>
+              <li>
                 <Link href="/contact">Request a quote</Link>
               </li>
               <li>
@@ -106,9 +115,13 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.legal}. Licensed &amp; insured.
             WorkSafeBC covered.
           </span>
-          <span>
-            Serving {site.serviceAreas.join(" · ")} &amp; the Lower Mainland
-          </span>
+          <nav className="footer__areas" aria-label="Service areas">
+            {areas.map((a) => (
+              <Link href={`/areas/${a.slug}`} key={a.slug}>
+                {a.city}
+              </Link>
+            ))}
+          </nav>
         </div>
 
         <div className="footer__wordmark" aria-hidden>

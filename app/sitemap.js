@@ -1,10 +1,18 @@
-import { services } from "@/lib/site";
+import { services, areas, costGuide } from "@/lib/site";
 
 const base = "https://www.genussrenovation.ca";
 
 export default function sitemap() {
   const now = new Date();
-  const staticRoutes = ["", "/projects", "/about", "/contact"].map((p) => ({
+  const staticRoutes = [
+    "",
+    "/projects",
+    "/cost-guide",
+    "/reviews",
+    "/areas",
+    "/about",
+    "/contact",
+  ].map((p) => ({
     url: `${base}${p}`,
     lastModified: now,
     priority: p === "" ? 1 : 0.8,
@@ -14,5 +22,10 @@ export default function sitemap() {
     lastModified: now,
     priority: 0.9,
   }));
-  return [...staticRoutes, ...serviceRoutes];
+  const areaRoutes = areas.map((a) => ({
+    url: `${base}/areas/${a.slug}`,
+    lastModified: now,
+    priority: 0.85,
+  }));
+  return [...staticRoutes, ...serviceRoutes, ...areaRoutes];
 }
