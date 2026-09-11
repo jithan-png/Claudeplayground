@@ -6,7 +6,7 @@ import {
   testimonials,
   differentiators,
 } from "@/lib/site";
-import { Art, HeroGrid } from "./Patterns";
+import { HeroGrid } from "./Patterns";
 import { Arrow, Check, Phone, whyIcons } from "./Icons";
 
 export function SectionHead({ eyebrow, title, aside, teal }) {
@@ -130,15 +130,7 @@ export function ProjectGrid({ limit }) {
         <article className="proj r" key={p.title} style={{ "--d": `${i * 70}ms` }}>
           <div className="proj__art">
             <span className="proj__type">{p.type}</span>
-            <Art
-              pattern={p.pattern}
-              variant={i > 2}
-              accent={
-                p.type === "Accessibility" || p.type === "Commercial"
-                  ? "teal"
-                  : "brass"
-              }
-            />
+            <img src={p.image} alt={p.alt} loading="lazy" />
           </div>
           <div className="proj__body">
             <h3 className="h3">{p.title}</h3>
@@ -228,6 +220,24 @@ export function CTA({
           </a>
         </div>
       </div>
+    </div>
+  );
+}
+
+export function PullQuote({ quote }) {
+  return (
+    <div className="wrap">
+      <figure className="pullquote r">
+        <span className="eyebrow eyebrow--plain">What clients say</span>
+        <blockquote style={{ marginTop: 22 }}>
+          &ldquo;{quote.quote}&rdquo;
+        </blockquote>
+        <figcaption>
+          <footer>
+            {quote.name} — {quote.detail}
+          </footer>
+        </figcaption>
+      </figure>
     </div>
   );
 }

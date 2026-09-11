@@ -9,8 +9,16 @@ export default function Footer() {
         <div className="footer__grid">
           <div>
             <div className="logo">
+              <img
+                className="logo__img"
+                src="/img/logo.webp"
+                alt=""
+                width={44}
+                height={44}
+                style={{ width: 46, height: 46 }}
+              />
               <span className="logo__text">
-                <span className="logo__name" style={{ fontSize: 26 }}>
+                <span className="logo__name" style={{ fontSize: 24 }}>
                   Genuss
                 </span>
                 <span className="logo__sub">Renovation Ltd.</span>
@@ -87,7 +95,7 @@ export default function Footer() {
                 </span>
               </li>
               <li>
-                <span>{site.hours}</span>
+                <span>{site.hoursShort}</span>
               </li>
             </ul>
           </div>
@@ -99,8 +107,7 @@ export default function Footer() {
             WorkSafeBC covered.
           </span>
           <span>
-            Serving {site.serviceAreas.slice(0, 5).join(" · ")} &amp; the Lower
-            Mainland
+            Serving {site.serviceAreas.join(" · ")} &amp; the Lower Mainland
           </span>
         </div>
 

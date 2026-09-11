@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site, services, faqs } from "@/lib/site";
+import { site, services, faqs, featuredQuote } from "@/lib/site";
 import { Arrow, Check, Phone } from "@/components/Icons";
 import { HeroGrid } from "@/components/Patterns";
 import ServiceCards from "@/components/ServiceCards";
@@ -7,6 +7,7 @@ import Accordion from "@/components/Accordion";
 import {
   CTA,
   Marquee,
+  PullQuote,
   Process,
   ProjectGrid,
   Quotes,
@@ -18,12 +19,14 @@ import {
 /** Headline that lifts in word by word. Pure CSS — no hydration needed. */
 function Headline() {
   const parts = [
-    { t: "Built", em: false },
-    { t: "with", em: false },
-    { t: "precision.", em: false },
-    { t: "Finished", em: false },
-    { t: "with", em: false },
-    { t: "care.", em: true },
+    { t: "Building", em: false },
+    { t: "your", em: false },
+    { t: "dreams,", em: false },
+    { t: "one", em: false },
+    { t: "renovation", em: false },
+    { t: "at", em: false },
+    { t: "a", em: false },
+    { t: "time.", em: true },
   ];
   return (
     <h1 className="display">
@@ -89,25 +92,24 @@ export default function Home() {
             className="hero__aside reveal-word"
             style={{ animationDelay: "950ms" }}
           >
-            <div className="hero__badge">
+            <figure className="hero__media">
+              <img
+                src="/img/1571459.webp"
+                alt="Bright modern interior with a floating timber staircase, built by Genuss Renovation"
+                fetchPriority="high"
+              />
+              <figcaption className="hero__caption">
+                <div>
+                  <span>Custom home</span>
+                  <strong>Morgan Creek, Surrey</strong>
+                </div>
+              </figcaption>
+            </figure>
+            <div className="hero__badge" style={{ marginTop: 14 }}>
               <h4 className="h4">Licensed, insured, WCB-covered</h4>
               <p>
                 Full liability coverage and active WorkSafeBC clearance on every
                 site. A+ rated with the Better Business Bureau.
-              </p>
-            </div>
-            <div className="hero__badge">
-              <h4 className="h4">We self-perform our core trades</h4>
-              <p>
-                Flooring, tile and finishing are done by our own crews — not
-                marked-up subcontractors you&apos;ve never met.
-              </p>
-            </div>
-            <div className="hero__badge">
-              <h4 className="h4">One project lead, start to finish</h4>
-              <p>
-                The person who quotes your job runs your job. One number to
-                call, one person who knows the answer.
               </p>
             </div>
           </aside>
@@ -238,6 +240,35 @@ export default function Home() {
             aside="Quality workmanship, clean execution, and respect for your space and your timeline. We understand the scope up front to prevent delays, communicate clearly, and follow through on what we committed to."
           />
           <WhyGrid />
+        </div>
+      </section>
+
+      {/* ---------------- Featured review ---------------- */}
+      <section className="section section--tight">
+        <PullQuote quote={featuredQuote} />
+      </section>
+
+      {/* ---------------- Image band ---------------- */}
+      <section className="section section--tight">
+        <div className="wrap">
+          <div className="band-img r">
+            <img
+              src="/img/4756488.webp"
+              alt="Interior stripped back to the studs during a full home gut renovation"
+              loading="lazy"
+            />
+            <div className="band-img__copy">
+              <span className="eyebrow">Site coordination</span>
+              <h2 className="h2">
+                We do the job <span className="ital">right the first time</span>
+              </h2>
+              <p>
+                Proper site coordination, scheduling and trade sequencing — so
+                every trade arrives to a site that&apos;s ready for them, and
+                the job finishes efficiently and professionally.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

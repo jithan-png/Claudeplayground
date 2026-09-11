@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, site } from "@/lib/site";
-import { Art } from "@/components/Patterns";
 import { Arrow, Phone } from "@/components/Icons";
 import Accordion from "@/components/Accordion";
 import {
@@ -73,8 +72,8 @@ export default async function ServicePage({ params }) {
               <p className="lede" style={{ marginTop: 20 }}>
                 {service.intro}
               </p>
-              <div className="art-frame" style={{ marginTop: 30 }} aria-hidden>
-                <Art pattern={service.pattern} accent={service.accent} />
+              <div className="art-frame" style={{ marginTop: 30 }}>
+                <img src={service.image} alt={service.imageAlt} />
               </div>
             </div>
             <div className="r" style={{ "--d": "120ms" }}>

@@ -73,9 +73,16 @@ export default function ContactPage() {
                 </div>
                 <div className="info-row">
                   <Clock size={16} />
-                  <div>
-                    <dt>Hours</dt>
-                    <dd>{site.hours}</dd>
+                  <div style={{ flex: 1 }}>
+                    <dt>Opening hours</dt>
+                    <dl className="hours">
+                      {site.hours.map(([day, time]) => (
+                        <div key={day}>
+                          <dt>{day}</dt>
+                          <dd>{time}</dd>
+                        </div>
+                      ))}
+                    </dl>
                   </div>
                 </div>
                 <div className="info-row">

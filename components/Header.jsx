@@ -8,32 +8,13 @@ import { Arrow, Phone } from "./Icons";
 
 function Mark() {
   return (
-    <svg className="logo__mark" viewBox="0 0 40 40" aria-hidden>
-      <defs>
-        <linearGradient id="lg-mark" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#e4c68c" />
-          <stop offset="100%" stopColor="#8f6d30" />
-        </linearGradient>
-      </defs>
-      <rect
-        x="1"
-        y="1"
-        width="38"
-        height="38"
-        rx="7"
-        fill="none"
-        stroke="url(#lg-mark)"
-        strokeWidth="1.4"
-      />
-      {/* A "G" built from a chevron floor-plank motif */}
-      <path
-        d="M27.5 14.5A8.2 8.2 0 1 0 28 24h-7"
-        fill="none"
-        stroke="url(#lg-mark)"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-      />
-    </svg>
+    <img
+      className="logo__img"
+      src="/img/logo.webp"
+      alt=""
+      width={38}
+      height={38}
+    />
   );
 }
 

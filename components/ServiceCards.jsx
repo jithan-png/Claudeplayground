@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { services } from "@/lib/site";
-import { Art } from "./Patterns";
 import { Arrow } from "./Icons";
 
 export default function ServiceCards() {
@@ -29,8 +28,8 @@ export default function ServiceCards() {
           style={{ "--d": `${i * 90}ms` }}
           onMouseMove={track}
         >
-          <div className="svc__art" aria-hidden>
-            <Art pattern={s.pattern} accent={s.accent} />
+          <div className="svc__art">
+            <img src={s.image} alt={s.imageAlt} loading="lazy" />
           </div>
           <span className="svc__num">
             {String(i + 1).padStart(2, "0")} — {s.eyebrow}
